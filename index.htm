@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--	File:	index.htm
-		Author: Eric Kellner 
-		E-mail: kaster@yahoo.com -->
+	Author: Eric Kellner 
+	E-mail: kaster@yahoo.com -->
 <html lang="en">
 <head>
 		<meta charset="UTF-8">
@@ -9,16 +9,20 @@
 		<!-- caching -->
 		<meta http-equiv="cache-control" content="public" />
 		<meta http-equiv="expires" content="0" />
-		<meta http-equiv="expires" content="Wed, 09 Jan 1985 13:01:00 GMT" />		
+		<meta http-equiv="expires" content="Wed, 09 Jan 1985 13:01:00 GMT" />
 		<title>HTML5</title>
 
 	<style>
-
+		.active{
+			color: #555;
+			background-color: #e7e7e7;
+		}
+/*
 		* {
 		  -webkit-box-sizing: border-box;
 		  -moz-box-sizing: border-box;
 		  box-sizing: border-box;
-		}
+		} */
 
 		p{
 		  font-family: "Helvetica Neue", arial, sans-serif;
@@ -63,16 +67,19 @@
 		  -webkit-align-content: flex-start;
 		}
 
-		@media all and (min-width: 420px){
+		@media all and (max-width: 420px){
 		  .mixItUp-container .mix,
 		  .mixItUp-container .gap{
-			width: 32%;
+			width: 100%;
 		  }
 		}
 	</style>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	
+	<link rel="stylesheet" href="dist/css/normalize.css">
+	<link rel="stylesheet" href="dist/css/grid.css">
 	
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -84,15 +91,49 @@
 
 	<script src="http://cdn.jsdelivr.net/jquery.mixitup/latest/jquery.mixitup.min.js"></script>	
 	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#mixItUp-container').mixItUp({
+				animation: {
+					enable:true,
+					effects: 'fade rotateY(-10deg)',
+					duration:600,
+					easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+					perspectiveDistance:'3000px',
+					perspectiveOrigin:'50% 50%',
+					queue:true,
+					queueLimit:1,
+					animateChangeLayout:false,
+					animateResizeContainer:true,
+					animateResizeTargets:false,
+					staggerSequence:null,
+					reverseOut:false
+					}
+			});
+			$('
+			
+		});
+
 		$(function(){
-		  $('#mixItUp-container').css('display','');
 		  $('#mixItUp-container').mixItUp({
 			animation: {
 			  animateResizeTargets: true
 			}
 		  });
-		  
-		})	
+		})			
+	</script>
+	<script type="text/javascript">
+		function list() {
+			$('#mixItUp-container').mixItUp('changeLayout', 'block');
+		}
+		function grid() {
+			$('#mixItUp-container').mixItUp('changeLayout', 'inline-block');
+		}
+
+		$('.nav li a').on('click', function() {
+			alert('clicked');
+			$(this).parent().parent().find('.active').removeClass('active');
+			$(this).parent().addClass('active');
+		});
 	</script>	
 </head>
 <body>
@@ -117,12 +158,13 @@
 			  <ul class="dropdown-menu" role="menu">
 				<li><a href="#" class="sort" data-sort="random">Shuffle</a></li>
 				<li class="divider"></li>
-				<li><a href="#" class="filter" data-filter="none">None</a></li>
 				<li><a href="#" class="filter" data-filter="all">All</a></li>
 				<li><a href="#" class="filter" data-filter=".category-1">Category 1</a></li>
+				<li><a href="#" class="filter" data-filter=".category-2">Category 2</a></li>
+				<li><a href="#" class="filter" data-filter="none">None</a></li>
 				<li class="divider"></li>
-				<li><a href="#"><i class="fa fa-th-list"></i>&nbsp;List</a></li>
-				<li><a href="#"><i class="fa fa-th"></i>&nbsp;Grid</a></li>
+				<li><a href="javascript:void(0)" onclick="list();"><i class="fa fa-th-list"></i>&nbsp;List</a></li>
+				<li><a href="#" onclick="grid();"><i class="fa fa-th"></i>&nbsp;Grid</a></li>
 			  </ul>
 			</li>
 		  </ul>
@@ -156,151 +198,135 @@
 </div>	
 
 <div class="container-fluid">
-<div class="row">
-
-		<div class="col-md-12">
+	<div class="row">
+		<div class="column full">
 		<div class="panel panel-default">
 		<div class="panel-heading">
-		  <h4 class="panel-title">
-			<strong class="text-center">Welcome</strong>
-			</a>
-		  </h4>
+			<h4 class="panel-title">
+				<strong>Welcome</strong>
+			</h4>
 		</div>
-		  <div class="panel-body">
-			<p class="text-left">Content here&hellip;</p>
-		  </div>
-		</div>
-		</div>
-</div>
-
+		<div class="panel-body">
+			<p class="text-left" style="max-width:100%">Content here&hellip;</p>
+		</div></div></div>
+	</div><!--row-end-->
 
 	<div id="mixItUp-container" class="mixItUp-container well">
-
-
-	  <div class="col-md-4 mix category-1">
-		<div class="panel panel-default">
-		<div class="panel-heading">
-		  <h4 class="panel-title">
-			<strong class="text-center">Category 1</strong>
-			</a>
-		  </h4>
-		</div>
-		  <div class="panel-body">
-			<p class="text-left">Content here&hellip;</p>
-		  </div>
-		  </div></div>
-
-	  <div class="col-md-4 mix category-1">
-		<div class="panel panel-default">
-		<div class="panel-heading">
-		  <h4 class="panel-title">
-			<strong class="text-center">Category 1</strong>
-			</a>
-		  </h4>
-		</div>
-		  <div class="panel-body">
-			<p class="text-left">Content here&hellip;</p>
-		  </div>
-		  </div></div>
-	  
-	  <div class="col-md-4 mix category-1">
-		<div class="panel panel-default">
-		<div class="panel-heading">
-		  <h4 class="panel-title">
-			<strong class="text-center">Category 1</strong>
-			</a>
-		  </h4>
-		</div>
-		  <div class="panel-body">
-			<p class="text-left">Content here&hellip;</p>
-		  </div>
-		  </div></div>
-	  
-	  
-	  <div class="col-md-4 mix">
-		<div class="panel panel-default">
-		<div class="panel-heading">
-		  <h4 class="panel-title">
-			<strong class="text-center">No category</strong>
-			</a>
-		  </h4>
-		</div>
-		  <div class="panel-body">
-			<p class="text-left">Content here&hellip;</p>
-		  </div>
-		  </div></div>
-		  
-		  
-	  <div class="col-md-4 mix">
-		<div class="panel panel-default">
-		<div class="panel-heading">
-		  <h4 class="panel-title">
-			<strong class="text-center">No category</strong>
-			</a>
-		  </h4>
-		</div>
-		  <div class="panel-body">
-			<p class="text-left">Content here&hellip;</p>
-		  </div>
-		  </div></div>
-		  
-	  <div class="col-md-4 mix">
-		<div class="panel panel-default">
-		<div class="panel-heading">
-		  <h4 class="panel-title">
-			<strong class="text-center">No category</strong>
-			</a>
-		  </h4>
-		</div>
-		  <div class="panel-body">
-			<p class="text-left">Content here&hellip;</p>
-		  </div>
-		  </div></div>
-		  
-	  <div class="col-md-4 mix category-1">
-		<div class="panel panel-default">
-		<div class="panel-heading">
-		  <h4 class="panel-title">
-			<strong class="text-center">Category 1</strong>
-			</a>
-		  </h4>
-		</div>
-		  <div class="panel-body">
-			<p class="text-left">Content here&hellip;</p>
-		  </div>
-		  </div></div>
-
-	  <div class="col-md-4 mix category-1">
-		<div class="panel panel-default">
-		<div class="panel-heading">
-		  <h4 class="panel-title">
-			<strong class="text-center">Category 1</strong>
-			</a>
-		  </h4>
-		</div>
-		  <div class="panel-body">
-			<p class="text-left">Content here&hellip;</p>
-		  </div>
-		  </div></div>
-	  
-	  <div class="col-md-4 mix category-1">
-		<div class="panel panel-default">
-		<div class="panel-heading">
-		  <h4 class="panel-title">
-			<strong class="text-center">Category 1</strong>
-			</a>
-		  </h4>
-		</div>
-		  <div class="panel-body">
-			<p class="text-left">Content here&hellip;</p>
-		  </div>
-		  </div></div>
-	  
-	  <div class="gap"></div>
-	</div>
 	
-</div></div>
+			<div class="column third mix category-1">
+			<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<strong class="text-center">Category 1</strong>
+				</h4>
+			</div>
+			<div class="panel-body">
+				<p class="text-left">Content here&hellip;</p>
+			</div></div></div>
 
+			<div class="column third mix category-1">
+			<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<strong class="text-center">Category 1</strong>
+				</h4>
+			</div>
+			<div class="panel-body">
+				<p class="text-left">Content here&hellip;</p>
+			</div></div></div>
+		  
+			<div class="column third mix category-1">
+			<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<strong class="text-center">Category 1</strong>
+				</h4>
+			</div>
+			<div class="panel-body">
+				<p class="text-left">Content here&hellip;</p>
+			</div></div></div>
+		  
+			<div class="column third mix">
+			<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<strong class="text-center">No category</strong>
+				</h4>
+			</div>
+			<div class="panel-body">
+				<p class="text-left">Content here&hellip;</p>
+			</div></div></div>
+			
+			<div class="column third mix">
+			<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<strong class="text-center">No category</strong>
+				</h4>
+			</div>
+			<div class="panel-body">
+				<p class="text-left">Content here&hellip;</p>
+			</div></div></div>
+			  
+			<div class="column third mix">
+			<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<strong class="text-center">No category</strong>
+				</h4>
+			</div>
+			<div class="panel-body">
+				<p class="text-left">Content here&hellip;</p>
+			</div></div></div>
+		
+			<div class="column third mix category-1">
+			<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<strong class="text-center">Category 1</strong>
+				</h4>
+			</div>
+			<div class="panel-body">
+				<p class="text-left">Content here&hellip;</p>
+			</div></div></div>
+
+			<div class="column third mix category-1">
+			<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<strong class="text-center">Category 1</strong>
+				</h4>
+			</div>
+			<div class="panel-body">
+				<p class="text-left">Content here&hellip;</p>
+			</div></div></div>
+		  
+			<div class="column third mix category-1">
+			<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<strong class="text-center">Category 1</strong>
+				</h4>
+			</div>
+			<div class="panel-body">
+				<p class="text-left">Content here&hellip;</p>
+			</div></div></div>
+
+			<div class="column full mix category-2">
+			<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<strong class="text-center">Category 2</strong>
+				</h4>
+			</div>
+			<div class="panel-body">
+				<p class="text-left">Content here&hellip;</p>
+			</div></div></div>	
+
+		<div class="gap"></div>
+			
+		</div><!--mixItUp-container-end-->
+</div><!--container-end-->
 <footer>
 	<div class="well center-text">&copy;&nbsp;Copyright 2014 Eric Kellner</div>
 </footer>
