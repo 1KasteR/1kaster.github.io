@@ -1,39 +1,332 @@
 <!DOCTYPE html>
-<!--	File:	ajax-content.htm
+<!--	File:	index.htm
 	Author: Eric Kellner 
 	E-mail: kaster@yahoo.com -->
-<html>
+<html lang="en">
 <head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- caching -->
+		<meta http-equiv="cache-control" content="public" />
+		<meta http-equiv="expires" content="0" />
+		<meta http-equiv="expires" content="Wed, 09 Jan 1985 13:01:00 GMT" />
+		<title>HTML5</title>
+
+	<style>
+		.dropdown-menu:before {
+		  position: absolute;
+		  top: -7px;
+		  right: 9px;
+		  display: inline-block;
+		  border-right: 7px solid transparent;
+		  border-bottom: 7px solid #ccc;
+		  border-left: 7px solid transparent;
+		  border-bottom-color: rgba(0, 0, 0, 0.2);
+		  content: '';
+		}
+
+		.dropdown-menu:after {
+		  position: absolute;
+		  top: -6px;
+		  right: 10px;
+		  display: inline-block;
+		  border-right: 6px solid transparent;
+		  border-bottom: 6px solid #ffffff;
+		  border-left: 6px solid transparent;
+		  content: '';
+		}	
+		
+		@media (max-width: 400px) {
+
+		.dropdown-menu:before {
+			display:none
+		}
+
+		.dropdown-menu:after {
+			display:none
+		}
+
+		}
+
+		@media (max-width: 767px) and (min-width: 401px) {
+
+		.dropdown-menu:before {
+			display:none
+		}
+
+		.dropdown-menu:after {
+			display:none
+		}
+
+		}		
+	
+		.active{
+			color: #555;
+			background-color: #e7e7e7;
+		}
+/*
+		* {
+		  -webkit-box-sizing: border-box;
+		  -moz-box-sizing: border-box;
+		  box-sizing: border-box;
+		} */
+
+		p{
+		  font-family: "Helvetica Neue", arial, sans-serif;
+		  color: #333;
+		  font-size: 14px;
+		  line-height: 1.4;
+		  margin-bottom: 1em;
+		}
+
+		p:last-child{
+		  margin-bottom: 0;
+		}
+
+		.mixItUp-container{
+		  text-align: justify;
+		  /*font-size: 0;*/
+		}
+
+		.mixItUp-container:after{
+		  content: '';
+		  display: inline-block;
+		  width: 100%;
+		}
+
+		.mixItUp-container .item,
+		.mixItUp-container .gap{
+		  display: inline-block;
+		  width: 49%;
+		}
+
+		.mixItUp-container .mix{
+		  display: none;
+		  -webkit-backface-visibility: hidden;
+		}
+
+		/* Flex box progressive enhancements: */
+
+		.mixItUp-container{
+		  display: -webkit-flex;
+		  -webkit-flex-flow: row wrap;
+			-webkit-justify-content: space-between;
+		  -webkit-align-content: flex-start;
+		}
+
+		@media all and (max-width: 420px){
+		  .mixItUp-container .mix,
+		  .mixItUp-container .gap{
+			width: 100%;
+		  }
+		}
+	</style>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	
+	<link rel="stylesheet" href="dist/css/normalize.css">
+	<link rel="stylesheet" href="dist/css/grid.css">
+	
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+	<script src="http://cdn.jsdelivr.net/jquery.mixitup/latest/jquery.mixitup.min.js"></script>	
 	<script type="text/javascript">
-	/*	The user should not be accessing this page directly.
-		The purpose of this page is to serve as ajax content 
-		for the main file (index.htm). The javascript script below
-		will redirect the user to the main file, should it be accessed
-		directly.	*/
-		window.location.replace('index.htm'); // http redirect
+		$(document).ready(function () {
+		
+			
+		});
+
+		$(function(){
+			$('#mixItUp-container').mixItUp({
+				load: {
+					filter: 'none'
+				},
+				animation: {
+					enable:true,
+					effects: 'fade rotateY(-10deg)',
+					duration:600,
+					easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+					perspectiveDistance:'3000px',
+					perspectiveOrigin:'50% 50%',
+					queue:true,
+					queueLimit:1,
+					animateChangeLayout:false,
+					animateResizeContainer:true,
+					animateResizeTargets:false,
+					staggerSequence:null,
+					reverseOut:false
+					}
+			});
+			
+			$('#skills').on('click', function(){
+				$('#skills-1').load('ajax-content.htm #skills-1'); //computer related
+				$('#skills-2').load('ajax-content.htm #skills-2'); //non-computer related
+			});
+			
+			$('#category-3').on('click', function(){
+				$('#ajax-category').load('ajax-content.htm #category-3');
+			});			
+			
+		})			
 	</script>
+	<script type="text/javascript">
+		function list() {
+			$('#mixItUp-container').mixItUp('changeLayout', 'block');
+		}
+		function grid() {
+			$('#mixItUp-container').mixItUp('changeLayout', 'inline-block');
+		}
+
+		$('.nav li a').on('click', function() {
+			$(this).parent().parent().find('.active').removeClass('active');
+			$(this).parent().addClass('active');
+		});
+		
+
+		
+		
+	</script>	
 </head>
 <body>
-	<div id="skills-1">
-		<ul class="list-group">
-			<li class="list-group-item">Application Design in VB.NET(Visual Studio), VBA, VBE, VSTO (Visual Studio Tools for Office(MS Office Addins))</li>
-			<li class="list-group-item">Web Design in HTML, PHP, JavaScript, CSS, XML, ASP, ASPX.</li>
-			<li class="list-group-item">Graphics Design in Cinema 4D, Maya, Photoshop.</li>
-			<li class="list-group-item">Database design in SQL, MySQL, MS Access.</li>
-			<li class="list-group-item">MS Office Applications, MS Excel, MS Access, MS Word, MS PowerPoint.</li>
-			<li class="list-group-item">Computer assembly</li>
-			<li class="list-group-item">Computer languages are known by code, rather than code editor/generation.</li>
-		</ul>
-	</div>
-	
-	<div id="skills-2">
-		<ul class="list-group">
-			<li class="list-group-item">Mechanical (Vehicle wise, most things except electrical.)</li>
-		</ul>	
-	</div>
+	<!-- NAVIGATION CONTENT - START -->
+	<nav id="navigation" class="navbar navbar-default" role="navigation">
+	  <div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="index.htm">Eric Kellner</a>
+		</div>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		  <ul class="nav navbar-nav navbar-right">
+			<li class="dropdown">
+			  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-navicon"></i>&nbsp;Menu <span class="caret"></span></a>
+			  <ul class="dropdown-menu" role="menu">
+				<!--<li><a href="#" class="sort" data-sort="random">Shuffle</a></li>
+				<li class="divider"></li>-->
+				<!--<li><a id="all" href="#" class="filter alert-success" data-filter="all">All</a></li>-->
+				<li><a id="skills" href="#" class="filter" data-filter=".skills">Skills</a></li>
+				<li><a id="category-2" href="#" class="filter" data-filter=".category-2">History</a></li>
+				<li><a id="category-3" href="#" class="filter" data-filter=".category-3">Contact</a></li>
+				<!--<li><a id="none" href="#" class="filter alert-success" data-filter="none">None</a></li>-->
+				<!--<li class="divider"></li>
+				<li><a href="javascript:void(0)" onclick="list();" class="alert-danger"><i class="fa fa-th-list"></i>&nbsp;List</a></li>
+				<li><a href="#" onclick="grid();" class="alert-danger"><i class="fa fa-th"></i>&nbsp;Grid</a></li>-->
+			  </ul>
+			</li>
+		  </ul>
+		  <!--<form class="navbar-form navbar-left" role="search">
+			<div class="form-group">
+			  <input type="text" class="form-control" placeholder="Search">
+			</div>
+			<button type="submit" class="btn btn-default">Submit</button>
+		  </form>-->
+		  <!--<ul class="nav navbar-nav navbar-right">
+			<li><a href="#">Link</a></li>
+			<li class="dropdown">
+			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+			  <ul class="dropdown-menu" role="menu">
+				<li><a href="#">Action</a></li>
+				<li><a href="#">Another action</a></li>
+				<li><a href="#">Something else here</a></li>
+				<li class="divider"></li>
+				<li><a href="#">Separated link</a></li>
+			  </ul>
+			</li>
+		  </ul>-->
+		</div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+	<!-- NAVIGATION CONTENT - END -->
 
-	<div id="category-3">
-		<p>Ajax content loaded. This content was loaded from ajax-content.htm</p>
-	</div>
+<div class="alert alert-warning alert-dismissible" role="alert" style="margin-top:-21px">
+  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <strong>Warning!</strong> This page is currently undergoing development. The content may change without notice.
+</div>	
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="column full">
+		<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<strong>Welcome</strong>
+			</h4>
+		</div>
+		<div class="panel-body">
+			<p class="text-left" style="max-width:100%">For the time being, there is currently no contact form available on this page. Feel free to contact me at kaster@yahoo.com</p>
+		</div></div></div>
+	</div><!--row-end-->
+
+	<div id="mixItUp-container" class="mixItUp-container">
+	
+			<div class="column half mix skills">
+			<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<strong class="text-center">Computer related</strong>
+				</h4>
+			</div>
+			<div class="panel-body">
+				<div id="skills-1">
+					<p class="text-left">Loading&hellip;</p>
+				</div>
+			</div></div></div>
+
+			<div class="column half mix skills">
+			<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<strong class="text-center">Non-computer related</strong>
+				</h4>
+			</div>
+			<div class="panel-body">
+				<div id="skills-2">
+					<p class="text-left">Loading&hellip;</p>
+				</div>
+			</div></div></div>
+		  
+			<div class="column full mix category-2">
+			<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<strong class="text-center">History</strong>
+				</h4>
+			</div>
+			<div class="panel-body">
+				<p>Content here&hellip;</p>
+			</div></div></div>
+			
+			<div class="column full mix category-3">
+			<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<strong class="text-center">Contact</strong>
+				</h4>
+			</div>
+			<div class="panel-body">
+				<div id="ajax-category">
+					<p class="text-left">Loading ajax content&hellip;</p>
+				</div>
+			</div></div></div>				
+
+		</div><!--mixItUp-container-end-->
+</div><!--container-end-->
+<footer>
+	<div class="well center-text">&copy;&nbsp;Copyright 2014 Eric Kellner</div>
+</footer>
+
 </body>
 </html>
