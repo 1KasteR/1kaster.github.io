@@ -139,7 +139,7 @@
 	<script src="http://cdn.jsdelivr.net/jquery.mixitup/latest/jquery.mixitup.min.js"></script>	
 	<script type="text/javascript">
 		$(document).ready(function () {
-			
+		
 			
 		});
 
@@ -164,6 +164,11 @@
 					reverseOut:false
 					}
 			});
+			
+			$('#category-3').on('click', function(){
+				$('#ajax-category').load('ajax-content.htm #category-3');
+			});			
+			
 		})			
 	</script>
 	<script type="text/javascript">
@@ -175,10 +180,13 @@
 		}
 
 		$('.nav li a').on('click', function() {
-			alert('clicked');
 			$(this).parent().parent().find('.active').removeClass('active');
 			$(this).parent().addClass('active');
 		});
+		
+
+		
+		
 	</script>	
 </head>
 <body>
@@ -201,15 +209,16 @@
 			<li class="dropdown">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-navicon"></i>&nbsp;Menu <span class="caret"></span></a>
 			  <ul class="dropdown-menu" role="menu">
-				<li><a href="#" class="sort" data-sort="random">Shuffle</a></li>
-				<li class="divider"></li>
-				<li><a id="all" href="#" class="filter" data-filter="all">All</a></li>
+				<!--<li><a href="#" class="sort" data-sort="random">Shuffle</a></li>
+				<li class="divider"></li>-->
+				<!--<li><a id="all" href="#" class="filter alert-success" data-filter="all">All</a></li>-->
 				<li><a id="category-1" href="#" class="filter" data-filter=".category-1">Category 1</a></li>
 				<li><a id="category-2" href="#" class="filter" data-filter=".category-2">Category 2</a></li>
-				<li><a id="none" href="#" class="filter" data-filter="none">None</a></li>
-				<li class="divider"></li>
-				<li><a href="javascript:void(0)" onclick="list();"><i class="fa fa-th-list"></i>&nbsp;List</a></li>
-				<li><a href="#" onclick="grid();"><i class="fa fa-th"></i>&nbsp;Grid</a></li>
+				<li><a id="category-3" href="#" class="filter" data-filter=".category-3">Category 3 (Ajax)</a></li>
+				<!--<li><a id="none" href="#" class="filter alert-success" data-filter="none">None</a></li>-->
+				<!--<li class="divider"></li>
+				<li><a href="javascript:void(0)" onclick="list();" class="alert-danger"><i class="fa fa-th-list"></i>&nbsp;List</a></li>
+				<li><a href="#" onclick="grid();" class="alert-danger"><i class="fa fa-th"></i>&nbsp;Grid</a></li>-->
 			  </ul>
 			</li>
 		  </ul>
@@ -367,6 +376,19 @@
 			<div class="panel-body">
 				<p class="text-left">Content here&hellip;</p>
 			</div></div></div>	
+			
+			<div class="column full mix category-3">
+			<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<strong class="text-center">Category 3</strong>
+				</h4>
+			</div>
+			<div class="panel-body">
+				<div id="ajax-category">
+					<p class="text-left">Loading ajax content&hellip;</p>
+				</div>
+			</div></div></div>				
 
 		</div><!--mixItUp-container-end-->
 </div><!--container-end-->
