@@ -13,6 +13,53 @@
 		<title>HTML5</title>
 
 	<style>
+		.dropdown-menu:before {
+		  position: absolute;
+		  top: -7px;
+		  right: 9px;
+		  display: inline-block;
+		  border-right: 7px solid transparent;
+		  border-bottom: 7px solid #ccc;
+		  border-left: 7px solid transparent;
+		  border-bottom-color: rgba(0, 0, 0, 0.2);
+		  content: '';
+		}
+
+		.dropdown-menu:after {
+		  position: absolute;
+		  top: -6px;
+		  right: 10px;
+		  display: inline-block;
+		  border-right: 6px solid transparent;
+		  border-bottom: 6px solid #ffffff;
+		  border-left: 6px solid transparent;
+		  content: '';
+		}	
+		
+		@media (max-width: 400px) {
+
+		.dropdown-menu:before {
+			display:none
+		}
+
+		.dropdown-menu:after {
+			display:none
+		}
+
+		}
+
+		@media (max-width: 767px) and (min-width: 401px) {
+
+		.dropdown-menu:before {
+			display:none
+		}
+
+		.dropdown-menu:after {
+			display:none
+		}
+
+		}		
+	
 		.active{
 			color: #555;
 			background-color: #e7e7e7;
@@ -92,7 +139,15 @@
 	<script src="http://cdn.jsdelivr.net/jquery.mixitup/latest/jquery.mixitup.min.js"></script>	
 	<script type="text/javascript">
 		$(document).ready(function () {
+			
+			
+		});
+
+		$(function(){
 			$('#mixItUp-container').mixItUp({
+				load: {
+					filter: 'none'
+				},
 				animation: {
 					enable:true,
 					effects: 'fade rotateY(-10deg)',
@@ -109,15 +164,6 @@
 					reverseOut:false
 					}
 			});
-			
-		});
-
-		$(function(){
-		  $('#mixItUp-container').mixItUp({
-			animation: {
-			  animateResizeTargets: true
-			}
-		  });
 		})			
 	</script>
 	<script type="text/javascript">
@@ -151,16 +197,16 @@
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		  <ul class="nav navbar-nav">
+		  <ul class="nav navbar-nav navbar-right">
 			<li class="dropdown">
-			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Filter <span class="caret"></span></a>
+			  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-navicon"></i>&nbsp;Menu <span class="caret"></span></a>
 			  <ul class="dropdown-menu" role="menu">
 				<li><a href="#" class="sort" data-sort="random">Shuffle</a></li>
 				<li class="divider"></li>
-				<li><a href="#" class="filter" data-filter="all">All</a></li>
-				<li><a href="#" class="filter" data-filter=".category-1">Category 1</a></li>
-				<li><a href="#" class="filter" data-filter=".category-2">Category 2</a></li>
-				<li><a href="#" class="filter" data-filter="none">None</a></li>
+				<li><a id="all" href="#" class="filter" data-filter="all">All</a></li>
+				<li><a id="category-1" href="#" class="filter" data-filter=".category-1">Category 1</a></li>
+				<li><a id="category-2" href="#" class="filter" data-filter=".category-2">Category 2</a></li>
+				<li><a id="none" href="#" class="filter" data-filter="none">None</a></li>
 				<li class="divider"></li>
 				<li><a href="javascript:void(0)" onclick="list();"><i class="fa fa-th-list"></i>&nbsp;List</a></li>
 				<li><a href="#" onclick="grid();"><i class="fa fa-th"></i>&nbsp;Grid</a></li>
@@ -321,7 +367,7 @@
 			<div class="panel-body">
 				<p class="text-left">Content here&hellip;</p>
 			</div></div></div>	
-			
+
 		</div><!--mixItUp-container-end-->
 </div><!--container-end-->
 <footer>
