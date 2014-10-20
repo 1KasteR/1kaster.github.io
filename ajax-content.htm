@@ -3,11 +3,19 @@
 	Author: Eric Kellner 
 	E-mail: kaster@yahoo.com -->
 <html>
+<head>
+	<script type="text/javascript">
+	/*	The user should not be accessing this page directly.
+		The purpose of this page is to serve as ajax content 
+		for the main file (index.htm). The javascript script below
+		will redirect the user to the main file, should it be accessed
+		directly.	*/
+		window.location.replace('index.htm'); // http redirect
+	</script>
+</head>
 <body>
-
 	<div id="category-3">
 		<p>Ajax content loaded. This content was loaded from ajax-content.htm</p>
 	</div>
-
 </body>
 </html>
